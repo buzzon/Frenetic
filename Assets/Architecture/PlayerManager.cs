@@ -5,6 +5,7 @@ using UnityEngine;
 public class PlayerManager : MonoBehaviour
 {
     private Rigidbody2D body;
+    private Animator animator;
 
     private float horizontal;
     private float vertical;
@@ -16,6 +17,7 @@ public class PlayerManager : MonoBehaviour
     void Start()
     {
         body = GetComponent<Rigidbody2D>();
+        animator = GetComponent<Animator>();
     }
 
     // Update is called once per frame
@@ -27,6 +29,11 @@ public class PlayerManager : MonoBehaviour
 
     private void FixedUpdate()
     {
+        animator.SetBool("WalkUp", vertical > 0.1);
+        animator.SetBool("WalkDown", vertical < -0.1);
+        animator.SetBool("WalkRight", horizontal > 0.1);
+        animator.SetBool("WalkLeft", horizontal < -0.1);
+
         if (horizontal != 0 && vertical != 0)
         {
             horizontal *= moveLimiter;
