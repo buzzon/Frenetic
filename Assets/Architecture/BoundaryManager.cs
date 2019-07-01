@@ -8,7 +8,8 @@ public class BoundaryManager : MonoBehaviour
 
     void OnTriggerStay2D(Collider2D col)
     {
+        if (col.gameObject.layer != LayerMask.NameToLayer("RoomBoundary")) return;
+
         Boundary = col.gameObject.GetComponent<BoxCollider2D>();
-        Debug.Log("Stay " +  col.gameObject.name + " : " + gameObject.name + " : " + Time.time);
     }
 }
