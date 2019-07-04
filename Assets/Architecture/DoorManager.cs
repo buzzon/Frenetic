@@ -5,7 +5,6 @@ using UnityEngine;
 public class DoorManager : MonoBehaviour
 {
     private Animator _animator;
-    private BoxCollider2D _collider;
     private bool _isOpen;
     private bool _playerDetected;
 
@@ -13,10 +12,9 @@ public class DoorManager : MonoBehaviour
     void Awake()
     {
         _animator = GetComponent<Animator>();
-        _collider = GetComponent<BoxCollider2D>();
     }
 
-    void Update()
+    void FixedUpdate()
     {
         if (!_playerDetected) return;
 
@@ -24,7 +22,6 @@ public class DoorManager : MonoBehaviour
 
         _animator.SetBool("Vertical", !_isOpen);
         _isOpen = !_isOpen;
-        _collider.isTrigger = !_collider.isTrigger;
     }
 
     void OnTriggerEnter2D(Collider2D col)

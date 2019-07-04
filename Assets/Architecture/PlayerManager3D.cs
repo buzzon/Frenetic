@@ -2,9 +2,9 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class PlayerManager3D : MonoBehaviour
+public class PlayerManager : MonoBehaviour
 {
-    private Rigidbody body;
+    private Rigidbody2D body;
     private Animator animator;
     private AudioSource audioSource;
     [SerializeField] private AudioClip[] audioClips;
@@ -18,7 +18,7 @@ public class PlayerManager3D : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        body = GetComponent<Rigidbody>();
+        body = GetComponent<Rigidbody2D>();
         animator = GetComponent<Animator>();
         audioSource = GetComponent<AudioSource>();
     }
@@ -26,9 +26,7 @@ public class PlayerManager3D : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        horizontal = 0;
-        vertical = 0;
-           horizontal = Input.GetAxisRaw("Horizontal");
+        horizontal = Input.GetAxisRaw("Horizontal");
         vertical = Input.GetAxisRaw("Vertical");
     }
 
