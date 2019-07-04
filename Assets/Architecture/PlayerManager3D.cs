@@ -2,9 +2,9 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class PlayerManager : MonoBehaviour
+public class PlayerManager3D : MonoBehaviour
 {
-    private Rigidbody2D body;
+    private Rigidbody body;
     private Animator animator;
     private AudioSource audioSource;
     [SerializeField] private AudioClip[] audioClips;
@@ -18,7 +18,7 @@ public class PlayerManager : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        body = GetComponent<Rigidbody2D>();
+        body = GetComponent<Rigidbody>();
         animator = GetComponent<Animator>();
         audioSource = GetComponent<AudioSource>();
     }
@@ -26,6 +26,8 @@ public class PlayerManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        horizontal = 0;
+        vertical = 0;
         horizontal = Input.GetAxisRaw("Horizontal");
         vertical = Input.GetAxisRaw("Vertical");
     }
@@ -49,7 +51,7 @@ public class PlayerManager : MonoBehaviour
             vertical *= moveLimiter;
         }
 
-        body.velocity = new Vector2(horizontal * runSpeed, vertical * runSpeed);
+        body.velocity = new Vector3(horizontal * runSpeed, 0, vertical * runSpeed);
 
         if (!audioSource.isPlaying && IsMove())
             UseStepSound();

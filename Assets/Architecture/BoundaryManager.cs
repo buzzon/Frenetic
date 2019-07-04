@@ -4,12 +4,13 @@ using UnityEngine;
 
 public class BoundaryManager : MonoBehaviour
 {
-    public static BoxCollider2D Boundary { get; private set; }
+    public static BoxCollider Boundary { get; private set; }
 
-    void OnTriggerStay2D(Collider2D col)
+    void OnTriggerEnter(Collider col)
     {
         if (col.gameObject.layer != LayerMask.NameToLayer("RoomBoundary")) return;
+        Debug.Log("Set Room " + col.name);
 
-        Boundary = col.gameObject.GetComponent<BoxCollider2D>();
+        Boundary = col.gameObject.GetComponent<BoxCollider>();
     }
 }

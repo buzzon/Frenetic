@@ -3,7 +3,7 @@
 [RequireComponent(typeof(Camera))]
 public class CameraManager : MonoBehaviour
 {
-    [SerializeField] private const float SmoothSpeed = 0.125f;
+    [SerializeField] private float _smoothSpeed = 0.125f;
     [SerializeField] private Transform _target;
     [SerializeField] private Vector3 _offset;
 
@@ -18,14 +18,18 @@ public class CameraManager : MonoBehaviour
     {
         var desiredPosition = _target.position + _offset;
 
-        //desiredPosition.x = DesiredPosition(desiredPosition.x,
-        //    BoundaryManager.Boundary.bounds.min.x + _camera.orthographicSize * _camera.aspect,
-        //    BoundaryManager.Boundary.bounds.max.x - _camera.orthographicSize * _camera.aspect);
-        //desiredPosition.y = DesiredPosition(desiredPosition.y,
-        //    BoundaryManager.Boundary.bounds.min.y + _camera.orthographicSize, 
-        //    BoundaryManager.Boundary.bounds.max.y - _camera.orthographicSize);
+        // Работает (ограничение левой и правой границы коллайдера BoundaryManager.Boundary.bounds)
+        desiredPosition.x = DesiredPosition(desiredPosition.x,
+            BoundaryManager.Boundary.bounds.min.x + _camera.orthographicSize * _camera.aspect,
+            BoundaryManager.Boundary.bounds.max.x - _camera.orthographicSize * _camera.aspect);
 
-        transform.position = Vector3.Lerp(transform.position, desiredPosition, SmoothSpeed);
+        // Ебанина которую нужно починить (ограничение камеры по верхней и нижней границе коллайдера BoundaryManager.Boundary.bounds)
+        desiredPosition.z = DesiredPosition(desiredPosition.z,
+            BoundaryManager.Boundary.bounds.min.z - _camera.orthographicSize, 
+            BoundaryManager.Boundary.bounds.max.z - _camera.orthographicSize);
+        ////
+
+        transform.position = Vector3.Lerp(transform.position, desiredPosition, _smoothSpeed);
     }
 
     private static float DesiredPosition(float desiredPosition, float min, float max)
