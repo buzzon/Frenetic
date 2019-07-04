@@ -28,7 +28,7 @@ public class PlayerManager3D : MonoBehaviour
     {
         horizontal = 0;
         vertical = 0;
-           horizontal = Input.GetAxisRaw("Horizontal");
+        horizontal = Input.GetAxisRaw("Horizontal");
         vertical = Input.GetAxisRaw("Vertical");
     }
 
@@ -51,7 +51,7 @@ public class PlayerManager3D : MonoBehaviour
             vertical *= moveLimiter;
         }
 
-        body.velocity = new Vector2(horizontal * runSpeed, vertical * runSpeed);
+        body.velocity = new Vector3(horizontal * runSpeed,0, vertical * runSpeed);
 
         if (!audioSource.isPlaying && IsMove())
             UseStepSound();

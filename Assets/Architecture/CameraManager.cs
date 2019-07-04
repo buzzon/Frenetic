@@ -11,7 +11,6 @@ public class CameraManager : MonoBehaviour
 
     void Awake()
     {
-        _offset.z += transform.position.z;
         _camera = GetComponent<Camera>();
     }
 
@@ -19,12 +18,12 @@ public class CameraManager : MonoBehaviour
     {
         var desiredPosition = _target.position + _offset;
 
-        desiredPosition.x = DesiredPosition(desiredPosition.x,
-            BoundaryManager.Boundary.bounds.min.x + _camera.orthographicSize * _camera.aspect,
-            BoundaryManager.Boundary.bounds.max.x - _camera.orthographicSize * _camera.aspect);
-        desiredPosition.y = DesiredPosition(desiredPosition.y,
-            BoundaryManager.Boundary.bounds.min.y + _camera.orthographicSize, 
-            BoundaryManager.Boundary.bounds.max.y - _camera.orthographicSize);
+        //desiredPosition.x = DesiredPosition(desiredPosition.x,
+        //    BoundaryManager.Boundary.bounds.min.x + _camera.orthographicSize * _camera.aspect,
+        //    BoundaryManager.Boundary.bounds.max.x - _camera.orthographicSize * _camera.aspect);
+        //desiredPosition.y = DesiredPosition(desiredPosition.y,
+        //    BoundaryManager.Boundary.bounds.min.y + _camera.orthographicSize, 
+        //    BoundaryManager.Boundary.bounds.max.y - _camera.orthographicSize);
 
         transform.position = Vector3.Lerp(transform.position, desiredPosition, SmoothSpeed);
     }
