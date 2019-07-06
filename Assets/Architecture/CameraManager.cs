@@ -25,7 +25,7 @@ public class CameraManager : MonoBehaviour
             BoundaryManager.Boundary.bounds.min.x + _camera.orthographicSize * _camera.aspect,
             BoundaryManager.Boundary.bounds.max.x - _camera.orthographicSize * _camera.aspect);
 
-        float front = _camera.orthographicSize * rotateconst;
+        var front = _camera.orthographicSize * rotateconst;
 
         desiredPosition.z = DesiredPosition(desiredPosition.z - _offset,
             BoundaryManager.Boundary.bounds.min.z - _offset + front, 
@@ -33,11 +33,6 @@ public class CameraManager : MonoBehaviour
         desiredPosition.y += _offset;
 
         transform.position = Vector3.Lerp(transform.position, desiredPosition, _smoothSpeed);
-    }
-
-    private static float ToRadian(float grad)
-    {
-        return grad * (float)System.Math.PI / 180;
     }
 
     private static float DesiredPosition(float desiredPosition, float min, float max)

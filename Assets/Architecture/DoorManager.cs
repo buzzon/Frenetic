@@ -30,7 +30,7 @@ public class DoorManager : MonoBehaviour
         _playerDetected = true;
         Debug.Log("player detected");
     }
-    //checks to see if player has left the collider, and disables door text if so
+    
     void OnTriggerExit2D(Collider2D col)
     {
         if (col.gameObject.tag != "Player") return;
