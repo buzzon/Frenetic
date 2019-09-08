@@ -13,9 +13,9 @@ TagManager:
   - UI
   - 
   - 
-  - RoomBoundary
-  - Minimap
-  - World
+  - Player
+  - Preview
+  - 
   - 
   - 
   - 
