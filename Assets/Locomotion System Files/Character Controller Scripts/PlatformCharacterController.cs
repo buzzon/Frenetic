@@ -5,7 +5,6 @@ using System.Collections;
 public class PlatformCharacterController : NetworkBehaviour {
 
     private CharacterMotor motor;
-    [SyncVar (hook = "RpcApplyDirection")] public Vector3 directionVector;
 
 
     public float walkMultiplier = 0.5f;
@@ -20,12 +19,12 @@ public class PlatformCharacterController : NetworkBehaviour {
     }
 	 
 	// Update is called once per frame
-	void Update () {
-
+	void Update ()
+    {
         if (!isLocalPlayer) return;
 
-        // Get input vector from kayboard or analog stick and make it length 1 at most
-        directionVector = new Vector3(Input.GetAxis("Horizontal"), Input.GetAxis("Vertical"), 0);
+            // Get input vector from kayboard or analog stick and make it length 1 at most
+            Vector3 directionVector = new Vector3(Input.GetAxis("Horizontal"), Input.GetAxis("Vertical"), 0);
 		if (directionVector.magnitude>1) directionVector = directionVector.normalized;
 		directionVector = directionVector.normalized * Mathf.Pow(directionVector.magnitude, 2);
 		
@@ -55,13 +54,6 @@ public class PlatformCharacterController : NetworkBehaviour {
 			}
 		}
 
-        RpcApplyDirection(directionVector);
-    }
-
-    [ClientRpc]
-    void RpcApplyDirection(Vector3 dir)
-    { 
-        // Apply direction
-        motor.desiredMovementDirection = dir;
+        motor.desiredMovementDirection = directionVector;
     }
 }

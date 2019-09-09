@@ -749,6 +749,7 @@ GameObject:
   - component: {fileID: 2210255173159452762}
   - component: {fileID: 2959428652709770060}
   - component: {fileID: -2120321816091215589}
+  - component: {fileID: 705097982322076447}
   m_Layer: 8
   m_Name: Human
   m_TagString: Untagged
@@ -42416,7 +42417,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8c2876e6f99e740e9bd18bcdb8a53e63, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  directionVector: {x: 0, y: 0, z: 0}
   walkMultiplier: 0.4
   defaultIsWalk: 1
 --- !u!114 &2959428652709770060
@@ -42451,7 +42451,7 @@ MonoBehaviour:
     i14: 0
     i15: 0
   m_ServerOnly: 0
-  m_LocalPlayerAuthority: 0
+  m_LocalPlayerAuthority: 1
 --- !u!143 &-2120321816091215589
 CharacterController:
   m_ObjectHideFlags: 0
@@ -42470,6 +42470,20 @@ CharacterController:
   m_SkinWidth: 0.08
   m_MinMoveDistance: 0
   m_Center: {x: 0, y: 0.88, z: 0}
+--- !u!114 &705097982322076447
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2210255173166560306}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 55f32cc9c7c80f24fa59408b0defdd79, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  speedLerpRotation: 0.1
+  positionTolerance: 1
 --- !u!1 &2210255173166560308
 GameObject:
   m_ObjectHideFlags: 0

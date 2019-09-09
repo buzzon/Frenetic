@@ -68,9 +68,9 @@ public class NormalCharacterMotor : CharacterMotor {
 		// Apply downwards gravity
 		movement += transform.up * -gravity * Time.deltaTime;
 		
-		if (jumping) {
+		if (jumping)
+        {
 			movement -= transform.up * -gravity * Time.deltaTime / 2;
-			
 		}
 		
 		// Apply movement
@@ -79,12 +79,9 @@ public class NormalCharacterMotor : CharacterMotor {
 	}
 	
 	// Update is called once per frame
-	void Update () {
-
-        if (!isLocalPlayer) return;
-
+	void Update ()
+    {
         UpdateFacingDirection();
-		
 		UpdateVelocity();
 	}
 }
