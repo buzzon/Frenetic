@@ -4,8 +4,9 @@ Copyright (c) 2008, Rune Skovbo Johansen & Unity Technologies ApS
 See the document "TERMS OF USE" included in the project folder for licencing details.
 */
 using UnityEngine;
+using UnityEngine.Networking;
 
-public class AlignmentTracker : MonoBehaviour {
+public class AlignmentTracker : NetworkBehaviour {
 	
 	public bool fixedUpdate = false;
 

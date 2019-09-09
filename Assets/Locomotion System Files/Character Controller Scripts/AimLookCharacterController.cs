@@ -1,7 +1,8 @@
 using UnityEngine;
 using System.Collections;
+using UnityEngine.Networking;
 
-public class AimLookCharacterController : MonoBehaviour {
+public class AimLookCharacterController : NetworkBehaviour {
 	
 	private CharacterMotor motor;
 	private static bool loggedInputInfo = false;

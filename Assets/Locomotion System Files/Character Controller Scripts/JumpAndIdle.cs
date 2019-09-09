@@ -1,8 +1,9 @@
 using UnityEngine;
+using UnityEngine.Networking;
 using System.Collections;
 
 [RequireComponent(typeof(AlignmentTracker))]
-public class JumpAndIdle : MonoBehaviour {
+public class JumpAndIdle : NetworkBehaviour {
 	
 	public AnimationClip jumpingAnimation;
 	public float jumpTimeStart = 0.0f;

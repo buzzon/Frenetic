@@ -6,6 +6,7 @@ See the document "TERMS OF USE" included in the project folder for licencing det
 using UnityEngine;
 using System.Collections;
 using System.Collections.Generic;
+using UnityEngine.Networking;
 
 [System.Serializable]
 public class LegInfo {
@@ -36,7 +37,7 @@ public class MotionGroupInfo {
 }
 
 [System.Serializable]
-public class LegController : MonoBehaviour {
+public class LegController : NetworkBehaviour{
 	
 	public float groundPlaneHeight;
 	

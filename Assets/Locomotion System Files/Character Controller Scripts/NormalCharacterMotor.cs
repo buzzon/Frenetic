@@ -80,7 +80,10 @@ public class NormalCharacterMotor : CharacterMotor {
 	
 	// Update is called once per frame
 	void Update () {
-		UpdateFacingDirection();
+
+        if (!isLocalPlayer) return;
+
+        UpdateFacingDirection();
 		
 		UpdateVelocity();
 	}
