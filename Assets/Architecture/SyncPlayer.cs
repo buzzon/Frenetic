@@ -25,18 +25,6 @@ public class SyncPlayer : NetworkBehaviour
         if (motor == null) Debug.Log("Transform is null!!");
     }
 
-    public override void OnStartLocalPlayer()
-    {
-        base.OnStartLocalPlayer();
-
-        if (!isLocalPlayer) return;
-
-        GameObject netCamera = GameObject.Find("NetCamera").gameObject;
-        CameraManager cameraManager = netCamera.GetComponent(typeof(CameraManager)) as CameraManager;
-        cameraManager.setTarget(GetComponent(typeof(Transform)) as Transform);
-        cameraManager.enabled = true;
-    }
-
     // Update is called once per frame
     void FixedUpdate()
     {
@@ -86,6 +74,4 @@ public class SyncPlayer : NetworkBehaviour
         CmdProviedRotationToServer(transform.rotation);
         CmdProviedPositionToServer(transform.position);
     }
-
-
 }
