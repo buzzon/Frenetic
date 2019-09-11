@@ -16,13 +16,25 @@ public class SyncPlayer : NetworkBehaviour
     private CharacterMotor motor;
     private Transform transform;
 
-    void Start()
+    private void Start()
     {
         motor = GetComponent(typeof(CharacterMotor)) as CharacterMotor;
         if (motor == null) Debug.Log("Motor is null!!");
 
         transform = GetComponent(typeof(Transform)) as Transform;
         if (motor == null) Debug.Log("Transform is null!!");
+    }
+
+    public override void OnStartLocalPlayer()
+    {
+        base.OnStartLocalPlayer();
+
+        if (!isLocalPlayer) return;
+
+        GameObject netCamera = GameObject.Find("NetCamera").gameObject;
+        CameraManager cameraManager = netCamera.GetComponent(typeof(CameraManager)) as CameraManager;
+        cameraManager.setTarget(GetComponent(typeof(Transform)) as Transform);
+        cameraManager.enabled = true;
     }
 
     // Update is called once per frame
@@ -34,13 +46,11 @@ public class SyncPlayer : NetworkBehaviour
 
     void LerpPosition()
     {
-        if (!isLocalPlayer)
-        {
-            motor.desiredMovementDirection = syncMovementDirection;
-            motor.desiredFacingDirection = syncFacingDirection;
-            transform.rotation = Quaternion.Lerp(transform.rotation, syncRotation, Time.time * speedLerpRotation);
-            if (Vector3.Distance(syncPosition, transform.position) > positionTolerance) transform.position = syncPosition;
-        }
+        if (isLocalPlayer) return;
+        motor.desiredMovementDirection = syncMovementDirection;
+        motor.desiredFacingDirection = syncFacingDirection;
+        transform.rotation = Quaternion.Lerp(transform.rotation, syncRotation, Time.time * speedLerpRotation);
+        if (Vector3.Distance(syncPosition, transform.position) > positionTolerance) transform.position = syncPosition;
     }
 
     [Command]
@@ -70,13 +80,11 @@ public class SyncPlayer : NetworkBehaviour
     [ClientCallback]
     void TransmitMovementDirection()
     {
-        if (isLocalPlayer)
-        {
-            CmdProviedMovementDirectionToServer(motor.desiredMovementDirection);
-            CmdProviedFacingDirectionToServer(motor.desiredFacingDirection);
-            CmdProviedRotationToServer(transform.rotation);
-            CmdProviedPositionToServer(transform.position);
-        }
+        if (!isLocalPlayer) return;
+        CmdProviedMovementDirectionToServer(motor.desiredMovementDirection);
+        CmdProviedFacingDirectionToServer(motor.desiredFacingDirection);
+        CmdProviedRotationToServer(transform.rotation);
+        CmdProviedPositionToServer(transform.position);
     }
 
 
