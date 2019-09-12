@@ -7,7 +7,7 @@ public class PlayerSetup : NetworkBehaviour
 {
     [SerializeField] Behaviour[] componentToDisable;
     Camera preview;
-    Canvas UI;
+    GameObject UIminimap;
 
     void Start()
     {
@@ -23,9 +23,9 @@ public class PlayerSetup : NetworkBehaviour
             preview.gameObject.SetActive(false);
 
 
-        UI = GameObject.Find("UI").GetComponent<Canvas>();
-        if (UI != null)
-            UI.enabled = true;
+        UIminimap = GameObject.Find("MinimapObject").transform.GetChild(0).gameObject;
+        if (UIminimap != null)
+            UIminimap.SetActive(true);
     }
 
     public override void OnStartLocalPlayer()
@@ -53,9 +53,9 @@ public class PlayerSetup : NetworkBehaviour
         if (preview != null)
             preview.gameObject.SetActive(true);
 
-        UI = GameObject.Find("UI").GetComponent<Canvas>();
-        if (UI != null)
-            UI.enabled = false;
+        UIminimap = GameObject.Find("MinimapObject").transform.GetChild(0).gameObject;
+        if (UIminimap != null)
+            UIminimap.SetActive(false);
 
         GameObject netCamera = GameObject.Find("NetCamera").gameObject;
         CameraManager cameraManager = netCamera.GetComponent(typeof(CameraManager)) as CameraManager;
